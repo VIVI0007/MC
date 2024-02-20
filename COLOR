@@ -1,0 +1,152 @@
+//xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity">
+
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Hello World!"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <Button
+       android:id="@+id/fontButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="138dp"
+       android:layout_marginTop="1dp"
+       android:layout_marginEnd="138dp"
+       android:layout_marginBottom="2dp"
+       android:text="Font Button"
+       app:layout_constraintBottom_toTopOf="@+id/textView2"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/colorButton" />
+
+   <Button
+       android:id="@+id/colorButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="138dp"
+       android:layout_marginTop="1dp"
+       android:layout_marginEnd="138dp"
+       android:layout_marginBottom="1dp"
+       android:text="Color Button"
+       app:layout_constraintBottom_toTopOf="@+id/fontButton"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/greenButton" />
+
+   <Button
+       android:id="@+id/redButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="138dp"
+       android:layout_marginTop="2dp"
+       android:layout_marginEnd="138dp"
+       android:layout_marginBottom="1dp"
+       android:text="Red Button"
+       app:layout_constraintBottom_toTopOf="@+id/blueButton"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+   <Button
+       android:id="@+id/blueButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="138dp"
+       android:layout_marginTop="1dp"
+       android:layout_marginEnd="138dp"
+       android:layout_marginBottom="240dp"
+       android:text="Blue Button"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/redButton" />
+
+   <Button
+       android:id="@+id/greenButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="138dp"
+       android:layout_marginTop="1dp"
+       android:layout_marginEnd="138dp"
+       android:layout_marginBottom="1dp"
+       android:text="Green Button"
+       app:layout_constraintBottom_toTopOf="@+id/colorButton"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.333"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+//MAIN
+package com.example.myapplication
+
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.TypedValue
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+   override fun onCreate(savedInstanceState: Bundle?) {
+       super.onCreate(savedInstanceState)
+       setContentView(R.layout.activity_main)
+       val increaseButton = findViewById<Button>(R.id.fontButton)
+       val textView1 = findViewById<TextView>(R.id.textView2)
+
+       increaseButton.setOnClickListener {
+           val currentSize = textView1.textSize // Get the current font size
+           val newSize = currentSize + 2 // Increase the font size by 2 pixels
+
+           textView1.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize) // Set the new font size
+       }
+       val changeColorButton = findViewById<Button>(R.id.colorButton)
+       val textView2 = findViewById<TextView>(R.id.textView2)
+
+       changeColorButton.setOnClickListener {
+           val randomColor = getRandomColor()
+           textView2.setTextColor(randomColor)
+       }
+
+       var redButton: Button = findViewById(R.id.redButton)
+       var blueButton: Button = findViewById(R.id.blueButton)
+       var greenButton: Button = findViewById(R.id.greenButton)
+       var textView3: TextView = findViewById(R.id.textView2)
+
+       redButton.setOnClickListener {
+           textView3.setBackgroundColor(Color.RED)
+       }
+
+       blueButton.setOnClickListener {
+           textView3.setBackgroundColor(Color.BLUE)
+       }
+
+       greenButton.setOnClickListener {
+           textView3.setBackgroundColor(Color.GREEN)
+       }
+   }
+
+   private fun getRandomColor(): Int {
+       val colors = arrayOf(
+           Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.CYAN, Color.MAGENTA
+       )
+       val randomIndex = (colors.indices).random()
+       return colors[randomIndex]
+   }
+}
